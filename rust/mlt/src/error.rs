@@ -1,6 +1,7 @@
-use crate::metadata::stream_encoding::{LogicalLevelTechnique, PhysicalLevelTechnique};
 use bytes_varint::VarIntError as BvVarIntError;
 use fastpfor::cpp::Exception;
+
+use crate::metadata::stream_encoding::{LogicalLevelTechnique, PhysicalLevelTechnique};
 
 pub type MltResult<T> = Result<T, MltError>;
 
@@ -26,6 +27,8 @@ pub enum MltError {
     FastPforFfi(String),
     #[error("invalid RLE run length (cannot convert to usize): value={0}")]
     RleRunLenInvalid(i128),
+    #[error("insufficient data to decode")]
+    InsufficientData,
 
     // Schema & metadata validation
     #[error("missing required field `{0}`")]

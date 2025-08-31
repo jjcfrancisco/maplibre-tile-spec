@@ -59,8 +59,8 @@ pub fn get_vector_type_int_stream(metadata: &StreamMetadata) -> VectorType {
         (_, _, _, 1) => VectorType::Const,
         _ => VectorType::Flat,
     }
-}
 
+/// Decode a physical level technique.
 fn decode_physical_level_technique(
     data: &mut TrackedBytes,
     metadata: &StreamMetadata,
@@ -86,14 +86,13 @@ fn decode_physical_level_technique(
             metadata.physical.technique,
         )),
     }
-}
 
+/// Decode a constant integer stream.
 pub fn decode_const_int_stream(
     data: &mut TrackedBytes,
     metadata: &StreamMetadata,
     is_signed: bool,
 ) -> MltResult<i32> {
-    // Return i32, not an enum!
     let values = decode_physical_level_technique(data, metadata)?;
 
     if values.len() == 1 {
